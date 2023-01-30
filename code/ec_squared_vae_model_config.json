@@ -1,9 +1,9 @@
 {
     "batch_size": 128,
-    "n_epochs": 100,
-    "unprocessed_data_dir": "ec2-vae-original/data/training/raw",
-    "train_data_path": "ec2-vae-original/data/training/processed/processed_data_2023-01-29-train.npy",
-    "val_data_path": "ec2-vae-original/data/training/processed/processed_data_2023-01-29-eval.npy",
+    "n_epochs": 10,
+    "unprocessed_data_dir": "data/training/raw",
+    "train_data_path": "data/training/preprocessed/processed_data_2023-01-30-train.npy",
+    "val_data_path": "data/training/preprocessed/processed_data_2023-01-30-eval.npy",
     "lr": 1e-3,
     "decay": 0.9999,
     "if_parallel": true,

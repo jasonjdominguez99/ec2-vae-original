@@ -45,9 +45,9 @@ def preprocess(root_dir, midi_dir, save_file_path, num_bars, frame_per_bar, pitc
     print(f"Number of midi files: {len(midi_files)}")
 
     num_eval = int(len(song_list) * data_ratio[1])
-    print(f"num_eval: {num_eval}")
+    # print(f"num_eval: {num_eval}")
     num_test = int(len(song_list) * data_ratio[2])
-    print(f"num test: {num_test}")
+    # print(f"num test: {num_test}")
     random.seed(0)
     eval_test_cand = set([song.split('/')[-1] for song in song_list])
     eval_set = random.choices(list(eval_test_cand), k=num_eval)
@@ -271,8 +271,8 @@ def preprocess(root_dir, midi_dir, save_file_path, num_bars, frame_per_bar, pitc
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--root_dir', type=str, default='./ec_squared_vae/nottingham_dataset/MIDI')
-    parser.add_argument('--midi_dir', type=str, default='melody_and_chords')
+    parser.add_argument('--root_dir', type=str, default='data/training')
+    parser.add_argument('--midi_dir', type=str, default='raw')
     
     # parser.add_argument('--root_dir', type=str, default='./ec_squared_vae')
     # parser.add_argument('--midi_dir', type=str, default='generation/source')
@@ -291,8 +291,8 @@ if __name__ == '__main__':
     pitch_range = args.pitch_range
     shift = args.shift
     
-    date = "2023-01-29"
-    save_file_path = f"ec_squared_vae/processed_data_{date}"
+    date = "2023-01-30"
+    save_file_path = f"data/training/preprocessed/processed_data_{date}"
     # save_file_path = "ec_squared_vae/generation/test_data"
     # save_file_path = "ec_squared_vae/generation/source/2-bar-source-melody-and-chords-figure-4"
     # save_file_path = "ec_squared_vae/generation/target/2-bar-rhythm-target-2-figure-8a"

@@ -41,7 +41,7 @@ class MusicArrayLoader():
             # m, c = self.__clipping(melody, chord)
             # self.__chunk_melodies += m
             # self.__chunk_chords += c
-            print(melody.shape)
+            # print(melody.shape)
             self.__chunk_melodies += [melody]
             self.__chunk_chords += [chord]
             

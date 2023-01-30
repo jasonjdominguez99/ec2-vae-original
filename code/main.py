@@ -28,14 +28,14 @@ def configure_model(config_file_path):
     with open(config_file_path) as f:
         args = json.load(f)
 
-    if not os.path.isdir("ec_squared_vae/log"):
-        os.mkdir("ec_squared_vae/log")
+    if not os.path.isdir("log"):
+        os.mkdir("log")
 
-    if not os.path.isdir("ec_squared_vae/params"):
-        os.mkdir("ec_squared_vae/params")
+    if not os.path.isdir("params"):
+        os.mkdir("params")
 
-    save_path = "ec_squared_vae/params/{}.pt".format(args["name"])
-    writer = SummaryWriter("ec_squared_vae/log/{}".format(args["name"]))
+    save_path = "params/{}.pt".format(args["name"])
+    writer = SummaryWriter("log/{}".format(args["name"]))
 
     model = ECSquaredVAE(
         args["roll_dim"], args["hidden_dim"], args["rhythm_dim"], 
@@ -64,7 +64,7 @@ def configure_model(config_file_path):
     step, pre_epoch = 0, 0
     model.train()
 
-    dl = MusicArrayLoader(args["data_path"], args["time_step"], 16)
+    dl = MusicArrayLoader(args["train_data_path"], args["time_step"], 16)
     dl.chunking()
     
     dl_val = MusicArrayLoader(args["val_data_path"], args["time_step"], 16)
@@ -155,7 +155,7 @@ def validate(model, args, writer, step, dl_val):
 
 
 def main():
-    config_fname = "ec_squared_vae/code/ec_squared_vae_model_config.json"
+    config_fname = "code/ec_squared_vae_model_config.json"
 
     (model, args, save_path, writer, scheduler,
      step, pre_epoch, dl, dl_val, optimizer) = configure_model(config_fname)

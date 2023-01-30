@@ -40,12 +40,12 @@ def loss_function(recon, recon_rhythm, target_tensor,
     CE1 = F.nll_loss(
         recon.view(-1, recon.size(-1)),
         target_tensor,
-        reduction="elementwise_mean"
+        reduction="mean"
     )
     CE2 = F.nll_loss(
         recon_rhythm.view(-1, recon_rhythm.size(-1)),
         rhythm_target,
-        reduction="elementwise_mean"
+        reduction="mean"
     )
 
     normal1 = std_normal(distribution_1.mean.size())
