@@ -152,6 +152,8 @@ def validate(model, args, writer, step, dl_val):
     
     print("validation loss: {:.5f}".format(loss.item()))
     writer.add_scalar("val_loss", loss.item(), step)
+    
+    return loss.item()
 
 
 def main():
@@ -160,19 +162,24 @@ def main():
     (model, args, save_path, writer, scheduler,
      step, pre_epoch, dl, dl_val, optimizer) = configure_model(config_fname)
 
+    min_val_loss = np.inf
     with tqdm(total=args["n_epochs"]) as epochs_pbar:
         while dl.get_n_epoch() < args["n_epochs"]:
             step = train(model, args, writer, scheduler, step, dl, optimizer)
             if dl.get_n_epoch() != pre_epoch:
                 pre_epoch = dl.get_n_epoch()
-                torch.save(model.cpu().state_dict(), save_path)
+                
+                val_loss = validate(model, args, writer, step, dl_val)
+                if val_loss < min_val_loss:
+                    min_val_loss = val_loss
+                    torch.save(model.cpu().state_dict(), save_path)
 
-                if torch.cuda.is_available():
-                    model.cuda()
-                    
-                validate(model, args, writer, step, dl_val)
-                print("Model saved!")
+                    if torch.cuda.is_available():
+                        model.cuda()
+                        
+                    print("Model saved!")
                 epochs_pbar.update(1)
+                print()
 
 if __name__ == "__main__":
     main()

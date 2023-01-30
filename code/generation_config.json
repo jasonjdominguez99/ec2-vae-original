@@ -1,4 +1,4 @@
 {
-    "source": "ec2-vae-original/data/generation/source/2-bar-source-melody-and-chords-figure-4.npy",
-    "target": "ec2-vae-original/data/generation/target/2-bar-rhythm-target-2-figure-8a.npy"
+    "source": "data/generation/source/2-bar-source-melody-and-chords-figure-4.npy",
+    "target": "data/generation/target/2-bar-rhythm-target-2-figure-8a.npy"
 }

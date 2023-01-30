@@ -16,7 +16,7 @@ def load_ec_squared_vae(config_file_path):
     with open(config_file_path) as f:
         args = json.load(f)
     
-    load_path = "ec_squared_vae/params/{}.pt".format(args["name"])
+    load_path = "params/{}.pt".format(args["name"])
 
     model = ECSquaredVAE(
         args["roll_dim"], args["hidden_dim"], args["rhythm_dim"], 
@@ -28,8 +28,8 @@ def load_ec_squared_vae(config_file_path):
     state_dict = torch.load(load_path)
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
-        name = k[7:] # remove module.
-        new_state_dict[name] = v
+        # k = k[7:] # remove module.
+        new_state_dict[k] = v
     
     model.load_state_dict(new_state_dict)
 
@@ -54,11 +54,11 @@ def get_latent_dist(model, data_path):
         -1, encode_tensor.size(-1)
     ).max(-1)[1]
 
-    if torch.cuda.is_available():
-        encode_tensor = encode_tensor.cuda()
-        target_tensor = target_tensor.cuda()
-        rhythm_target = rhythm_target.cuda()
-        c = c.cuda()
+    # if torch.cuda.is_available():
+    #     encode_tensor = encode_tensor.cuda()
+    #     target_tensor = target_tensor.cuda()
+    #     rhythm_target = rhythm_target.cuda()
+    #     c = c.cuda()
 
     dis1, dis2 = model.encoder(encode_tensor, c)
     z1 = dis1.rsample()
@@ -68,14 +68,14 @@ def get_latent_dist(model, data_path):
 
 def main():
     # Load trained model
-    config_file_path = "ec_squared_vae/code/ec_squared_vae_model_config.json"
+    config_file_path = "code/ec_squared_vae_model_config.json"
     model = load_ec_squared_vae(config_file_path)
     model.training = False
     print("Loaded!")
     
     # Encode the source and target melodies to get z_p of the source and
     # z_r of the target 
-    generation_config_file_path = "ec_squared_vae/code/generation_config.json"
+    generation_config_file_path = "code/generation_config.json"
     with open(generation_config_file_path) as f:
         args = json.load(f)
         
