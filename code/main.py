@@ -132,7 +132,7 @@ def train(model, args, writer, scheduler, step, dl, optimizer):
 
 
 def validate(model, args, writer, step, dl_val):
-    batch, c = dl_val.get_batch(dl_val.get_n_sample())
+    batch, c = dl_val.get_full_batch()
     encode_tensor, target_tensor, rhythm_target, c = prepare_batch(batch, c)
     
     recon, recon_rhythm, dis1m, dis1s, dis2m, dis2s = model(encode_tensor, c)

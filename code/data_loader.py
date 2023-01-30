@@ -85,3 +85,7 @@ class MusicArrayLoader():
             return self.__chunk_melodies[
                 t:self.__current_index], self.__chunk_chords[
                     t:self.__current_index]
+                
+    def get_full_batch(self):
+        self.check()
+        return self.__chunk_melodies, self.__chunk_chords

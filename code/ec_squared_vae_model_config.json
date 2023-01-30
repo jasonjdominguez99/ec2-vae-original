@@ -6,7 +6,7 @@
     "val_data_path": "data/training/preprocessed/processed_data_2023-01-30-eval.npy",
     "lr": 1e-3,
     "decay": 0.9999,
-    "if_parallel": true,
+    "if_parallel": false,
     "name": "cdvae_2bar-2023-01-30",
     "roll_dim": 130,
     "hidden_dim": 2048,
