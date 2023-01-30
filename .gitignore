@@ -129,8 +129,10 @@ dmypy.json
 .pyre/
 
 # Data
-data/
-*.npy
+# data/
+# *.npy
 
 # Models
+params/
+log/
 *.pt
